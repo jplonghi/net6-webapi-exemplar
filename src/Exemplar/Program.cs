@@ -136,7 +136,6 @@ try
     app.MapControllers();
 
     //Minimal API 
-    app.MapGet("/", () => Results.Redirect("/swagger")).ExcludeFromDescription();
     app.MapGet( "/message", ( IConfiguration config ) => $"{ config.GetValue<string>( "message" )} - {config.GetValue<string>( "autor:lastname" )} - {config.GetValue<string>( "languages:0" )}" );
     app.MapGet( "/date", () => Results.Ok( new { Birth = new System.DateOnly( 1984, 7, 21 ).ToLongDateString(), Time = new System.TimeOnly( 15, 0 ).ToLongTimeString()} ) );
     app.MapGet( "/oops", new Func<string>( () => throw new InvalidOperationException( "Oops!" ) ) ).WithName( "Exc" ).WithTags( "Testing" );
